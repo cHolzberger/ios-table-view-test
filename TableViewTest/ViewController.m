@@ -14,7 +14,6 @@
 
 @implementation ViewController
 
-CGSize s;
 static NSArray* labels;
 
 + (void)initialize {
@@ -73,7 +72,6 @@ static NSArray* labels;
     [footer setText:NSLocalizedString(text,nil)];
     
     [footerView addSubview:footer];
-    s = [footer sizeThatFits: CGSizeMake(tableView.frame.size.width-20, 90)];
     footer.font = [UIFont systemFontOfSize:14];
     return footerView;
 }
