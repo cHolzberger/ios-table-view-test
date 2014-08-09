@@ -37,16 +37,20 @@ static NSArray* labels;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return labels.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return labels.count;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    int row = [indexPath row];
+    int section = [indexPath section];
+        
     UITableViewCell *t = [UITableViewCell new];
     t.textLabel.text = @"Demo";
     return t;
@@ -55,8 +59,10 @@ static NSArray* labels;
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UILabel *footer;
     UIView *footerView;
-    NSString* text = labels[section];
+    
 
+
+    NSString* text = labels[section];
     CGRect labelRect = [text
                         boundingRectWithSize:CGSizeMake(tableView.frame.size.width-20, 500)
                         options:NSStringDrawingUsesLineFragmentOrigin
@@ -66,13 +72,17 @@ static NSArray* labels;
                         context:nil];
     
     footerView = [[UIView alloc] init];
-    footer = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, labelRect.size.width, labelRect.size.height)];
+    footer = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, labelRect.size.width, labelRect.size.height)];
     [footer setNumberOfLines:0];
     [footer setLineBreakMode:NSLineBreakByWordWrapping];
     [footer setText:NSLocalizedString(text,nil)];
     
     [footerView addSubview:footer];
     footer.font = [UIFont systemFontOfSize:14];
+    
+    footer.textColor = [UIColor whiteColor];
+    footer.backgroundColor = [UIColor greenColor];
+    footerView.backgroundColor = [UIColor blackColor];
     return footerView;
 }
 
@@ -86,7 +96,7 @@ static NSArray* labels;
                                      NSFontAttributeName : [UIFont systemFontOfSize:14]
                                      }
                         context:nil];
-    return labelRect.size.height;
+    return labelRect.size.height + 10;
 }
 
 
