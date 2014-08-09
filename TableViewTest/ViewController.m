@@ -15,6 +15,8 @@
 @implementation ViewController
 
 static NSArray* labels;
+int headerInsetTop = 5;
+int headerInsetLeft =10;
 
 + (void)initialize {
           labels = [NSArray arrayWithObjects: @"1.", @"2.", @"Read something about this app. Read something about this app. Read something about this app. Read something about this app. Read something about this app. Read something about this app. Read something about this app. Read something about this app.",nil];
@@ -64,7 +66,7 @@ static NSArray* labels;
 
     NSString* text = labels[section];
     CGRect labelRect = [text
-                        boundingRectWithSize:CGSizeMake(tableView.frame.size.width-20, 500)
+                        boundingRectWithSize:CGSizeMake(tableView.frame.size.width-2*headerInsetLeft, 500)
                         options:NSStringDrawingUsesLineFragmentOrigin
                         attributes:@{
                                      NSFontAttributeName : [UIFont systemFontOfSize:14]
@@ -72,7 +74,7 @@ static NSArray* labels;
                         context:nil];
     
     footerView = [[UIView alloc] init];
-    footer = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, labelRect.size.width, labelRect.size.height)];
+    footer = [[UILabel alloc] initWithFrame:CGRectMake(headerInsetLeft, headerInsetTop, labelRect.size.width , labelRect.size.height )];
     [footer setNumberOfLines:0];
     [footer setLineBreakMode:NSLineBreakByWordWrapping];
     [footer setText:NSLocalizedString(text,nil)];
@@ -90,13 +92,13 @@ static NSArray* labels;
     NSString* text = labels[section];
 
     CGRect labelRect = [text
-                        boundingRectWithSize:CGSizeMake(tableView.frame.size.width-20, 500)
+                        boundingRectWithSize:CGSizeMake(tableView.frame.size.width-2*headerInsetLeft, 500)
                         options:NSStringDrawingUsesLineFragmentOrigin
                         attributes:@{
                                      NSFontAttributeName : [UIFont systemFontOfSize:14]
                                      }
                         context:nil];
-    return labelRect.size.height + 10;
+    return labelRect.size.height + 2*headerInsetTop;
 }
 
 
